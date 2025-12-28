@@ -149,4 +149,4 @@ This project was developed to:
 
 **Dhivakar S**
 MCA Graduate | Python Full-Stack Developer (Fresher)
-GitHub: [https://github.com/dhivakar-mca](https://github.com/dhivakar-mca)
+GitHub: https://github.com/DhivakarS05
