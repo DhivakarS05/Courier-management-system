@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book a Courier</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .form-container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="number"], textarea, select {
+            width: 100%;
+            padding: 7px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="checkbox"] {
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .back-link {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>📦 Book a Courier</h2>
+
+    <form method="POST" action="{{ url_for('book_courier') }}" id="courierForm">
+        <!-- Sender -->
+        <label>Sender Name:</label>
+        <input type="text" id="sender_name" name="sender_name">
+        <div class="error" id="sender_name_error"></div>
+
+        <label>Pickup Address:</label>
+        <textarea id="pickup_address" name="pickup_address"></textarea>
+        <div class="error" id="pickup_address_error"></div>
+
+        <label>Pincode:</label>
+        <input type="text" id="sender_pincode" name="sender_pincode">
+        <div class="error" id="sender_pincode_error"></div>
+
+        <label>Sender Phone Number:</label>
+        <input type="text" id="sender_phone" name="sender_phone">
+        <div class="error" id="sender_phone_error"></div>
+
+        <!-- Receiver -->
+        <label>Receiver Name:</label>
+        <input type="text" id="receiver_name" name="receiver_name">
+        <div class="error" id="receiver_name_error"></div>
+
+        <label>Delivery Address:</label>
+        <textarea id="receiver_address" name="receiver_address"></textarea>
+        <div class="error" id="receiver_address_error"></div>
+
+        <label>Pincode:</label>
+        <input type="text" id="receiver_pincode" name="receiver_pincode">
+        <div class="error" id="receiver_pincode_error"></div>
+
+        <label>Receiver Phone Number:</label>
+        <input type="text" id="receiver_phone" name="receiver_phone">
+        <div class="error" id="receiver_phone_error"></div>
+
+        <!-- Courier details -->
+        <label>Courier Type:</label>
+        <select id="courier_type" name="courier_type">
+            <option value="">-- Select Type --</option>
+            <option value="normal">Normal</option>
+            <option value="speed">Speed</option>
+        </select>
+        <div class="error" id="courier_type_error"></div>
+
+        <label>Weight (kg):</label>
+        <input type="number" id="weight" name="weight" step="0.01" min="0.01">
+        <div class="error" id="weight_error"></div>
+
+        <label><input type="checkbox" name="insurance"> Insurance (2% of base cost)</label>
+
+        <button type="submit">Calculate & Preview</button>
+    </form>
+
+    <a class="back-link" href="{{ url_for('customer_dashboard') }}">⬅ Back to Dashboard</a>
+</div>
+
+<script>
+document.getElementById('courierForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // prevent form submit until validated
+    let valid = true;
+
+    // Clear previous errors
+    document.querySelectorAll('.error').forEach(err => err.innerText = "");
+
+    // Collect field values
+    let sender_name = document.getElementById("sender_name").value.trim();
+    let pickup_address = document.getElementById("pickup_address").value.trim();
+    let sender_pincode = document.getElementById("sender_pincode").value.trim();
+    let sender_phone = document.getElementById("sender_phone").value.trim();
+    let receiver_name = document.getElementById("receiver_name").value.trim();
+    let receiver_address = document.getElementById("receiver_address").value.trim();
+    let receiver_pincode = document.getElementById("receiver_pincode").value.trim();
+    let receiver_phone = document.getElementById("receiver_phone").value.trim();
+    let courier_type = document.getElementById("courier_type").value;
+    let weight = document.getElementById("weight").value.trim();
+
+    // --- VALIDATION ---
+
+    if (sender_name === "") {
+        document.getElementById("sender_name_error").innerText = "Sender name is required.";
+        valid = false;
+    }
+    if (pickup_address === "") {
+        document.getElementById("pickup_address_error").innerText = "Pickup address is required.";
+        valid = false;
+    }
+    if (!/^\d{6}$/.test(sender_pincode)) {
+        document.getElementById("sender_pincode_error").innerText = "Enter a valid 6-digit pincode.";
+        valid = false;
+    }
+    if (!/^\d{10}$/.test(sender_phone)) {
+        document.getElementById("sender_phone_error").innerText = "Enter a valid 10-digit phone number.";
+        valid = false;
+    }
+    if (receiver_name === "") {
+        document.getElementById("receiver_name_error").innerText = "Receiver name is required.";
+        valid = false;
+    }
+    if (receiver_address === "") {
+        document.getElementById("receiver_address_error").innerText = "Delivery address is required.";
+        valid = false;
+    }
+    if (!/^\d{6}$/.test(receiver_pincode)) {
+        document.getElementById("receiver_pincode_error").innerText = "Enter a valid 6-digit pincode.";
+        valid = false;
+    }
+    if (!/^\d{10}$/.test(receiver_phone)) {
+        document.getElementById("receiver_phone_error").innerText = "Enter a valid 10-digit phone number.";
+        valid = false;
+    }
+    if (courier_type === "") {
+        document.getElementById("courier_type_error").innerText = "Please select a courier type.";
+        valid = false;
+    }
+    if (weight === "" || parseFloat(weight) <= 0) {
+        document.getElementById("weight_error").innerText = "Enter a valid weight.";
+        valid = false;
+    } else if (parseFloat(weight) < 0.5) {
+        alert("Weight below 0.5 kg detected. Minimum charge ₹50 will apply.");
+    }
+
+    if (valid) {
+        e.target.submit(); // if all valid, submit the form
+    }
+});
+</script>
+</body>
+</html>

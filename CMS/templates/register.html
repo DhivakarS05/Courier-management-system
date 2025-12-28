@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #00b4db, #0083b0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .register-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            align-self: flex-start;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 12px 30px;
+            border-radius: 30px;
+            border: 2px solid #fff;
+            background: transparent;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #fff;
+            color: #0083b0;
+            transform: translateY(-3px);
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            color: #fff;
+            text-decoration: underline;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            color: #ffd700;
+        }
+
+        .error-message {
+            color: #ff6961;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <h2>Customer Registration</h2>
+
+        {% if error %}
+            <div class="error-message">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+            <label>Username:</label>
+            <input type="text" name="username" placeholder="Enter your username" 
+                   value="{{ username|default('') }}" required>
+
+            <label>Email:</label>
+            <input type="email" 
+                   name="email" 
+                   placeholder="Enter your Gmail address" 
+                   value="{{ email|default('') }}"
+                   required
+                   pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+                   title="Please enter a valid Gmail address ending with @gmail.com">
+
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Enter your password" required>
+
+            <label>Phone Number:</label>
+            <input type="text" name="phone" placeholder="Enter 10-digit phone" 
+                   value="{{ phone|default('') }}"
+                   pattern="\d{10}" title="Enter exactly 10 digits" required>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <a href="{{ url_for('login_user') }}">Already have an account? Login</a>
+    </div>
+</body>
+</html>

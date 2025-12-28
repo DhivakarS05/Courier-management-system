@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      background: #333;
+      padding: 15px;
+      color: #fff;
+      text-align: center;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+    h2 {
+      margin-top: 0;
+      color: #333;
+    }
+    a.btn {
+      display: inline-block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      background: #007bff;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    a.btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <h1>Admin Dashboard</h1>
+    <a href="{{ url_for('logout') }}" class="btn"  style="color:yellow;">Logout</a>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h2>Staff Management</h2>
+      <a href="{{ url_for('view_staff') }}" class="btn">👥 View Staff</a>
+      <a href="{{ url_for('add_staff') }}" class="btn">➕ Add Staff</a>
+     <a href="{{ url_for('assign_staff_page') }}" class="btn">📌 Assign Staff to Location</a>
+    </div>
+
+    <div class="card">
+      <h2>Customer Management</h2>
+      <a href="{{ url_for('view_customers') }}" class="btn">👤 View Customers</a>
+    </div>
+
+    <div class="card">
+      <h2>Courier Management</h2>
+      <a href="{{ url_for('view_couriers') }}" class="btn">📦 View Couriers</a>
+      <a href="{{ url_for('view_tracking') }}" class="btn">🔎 View Tracking IDs</a>
+    </div>
+  </div>
+</body>
+</html>

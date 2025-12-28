@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: #2c3e50;
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            flex: 1;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        .flash-message {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .flash-message.success {
+            background: #2ecc71;
+            color: white;
+        }
+        .flash-message.error {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .nav-links {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 6px;
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: #2c3e50;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #2c3e50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Customer Dashboard</h1>
+    </header>
+
+    <div class="container">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <p>Welcome, <b>{{ session['role'] }}</b>!</p>
+
+        <div class="nav-links">
+            <a href="{{ url_for('book_courier') }}">📦 Book New Courier</a>
+            <a href="{{ url_for('my_couriers') }}">📋 My Couriers</a>
+            <a href="{{ url_for('track_courier') }}">🔍 Track Courier</a>
+            <a href="{{ url_for('logout') }}">🚪 Logout</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Courier Management System</p>
+    </footer>
+</body>
+</html>

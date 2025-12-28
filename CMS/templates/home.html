@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Courier Management System</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #00b4db, #0083b0);
+      color: #fff;
+    }
+
+    /* Navbar */
+    nav {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav h1 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      margin-left: 20px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav ul li a:hover {
+      color: #ffd700;
+    }
+
+    /* Container (homepage buttons) */
+    .container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 50px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      margin: 40px auto;
+      width: 70%;
+    }
+    .btn {
+      display: inline-block;
+      margin: 15px;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: 0.3s;
+      border: 2px solid #fff;
+    }
+    .btn:hover {
+      background: #fff;
+      color: #0083b0;
+      transform: translateY(-5px);
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 12px;
+      transition: transform 0.2s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card h2 {
+      color: #ffd700;
+      font-size: 2em;
+      margin: 10px 0;
+    }
+
+    /* Services */
+    .services, .contact {
+      padding: 50px;
+      text-align: center;
+    }
+    .services h2, .contact h2 {
+      color: #ffd700;
+      margin-bottom: 20px;
+    }
+    .services p, .contact p {
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <h1>Courier Management System</h1>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="{{ url_for('login_user') }}">Login</a></li>
+      <li><a href="{{ url_for('track_courier') }}">Tracking</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+      {% if 'user_id' in session %}
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+  <div class="container">
+    <h1>Welcome to Courier Management System</h1>
+    <p style="font-size:1.2em; margin:20px 0;">
+        Fast. Reliable. Convenient. <br>
+        Experience <b>Doorstep Pickup and Delivery</b> that saves your <strong>time</strong> and <strong>money</strong>.  
+        Track your parcels in real-time and enjoy hassle-free courier services with just a few clicks.
+    </p>
+    {% if 'user_id' in session %}
+      <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+    {% else %}
+      <a href="{{ url_for('login_admin') }}" class="btn">Admin Login</a>
+      <a href="{{ url_for('login_staff') }}" class="btn">Staff Login</a>
+      <a href="{{ url_for('login_user') }}" class="btn">Customer Login</a>
+    {% endif %}
+</div>
+
+
+ 
+
+  <!-- Services -->
+  <section id="services" class="services">
+    <h2>Our Services</h2>
+    <p>
+      We provide fast and reliable courier services including parcel delivery,
+      real-time tracking, safe packaging, and doorstep pickup. 
+      Our mission is to deliver your packages on time, every time.
+    </p>
+  </section>
+
+  <!-- Contact -->
+  <section  id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Email: support@courier.com</p>
+    <p>Phone: +91 73395 51331</p>
+    <p>Address: Chennai, Tamil Nadu, India</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Courier Management System | All Rights Reserved
+  </footer>
+
+</body>
+</html>

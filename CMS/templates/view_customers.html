@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Customers</title>
+  <style>
+    body { font-family: Arial; background:#f9f9f9; padding:20px; }
+    table { border-collapse: collapse; width: 100%; background:#fff; }
+    th, td { border:1px solid #ddd; padding:10px; text-align:center; }
+    th { background:#444; color:#fff; }
+  </style>
+</head>
+<body>
+  <h2>Customer Details</h2>
+  <table>
+    <tr>
+      <th>ID</th><th>Name</th><th>Email</th><th>Phone</th>
+    </tr>
+    {% for c in customers %}
+    <tr>
+      <td>{{ c.id }}</td>
+      <td>{{ c.username }}</td>
+      <td>{{ c.email }}</td>
+      <td>{{ c.phone }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <br>
+  <a href="{{ url_for('admin_dashboard') }}">⬅ Back</a>
+</body>
+</html>

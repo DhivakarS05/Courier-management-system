@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tracking IDs</title>
+  <style>
+    body { font-family: Arial; background:#f9f9f9; padding:20px; }
+    table { border-collapse: collapse; width: 100%; background:#fff; }
+    th, td { border:1px solid #ddd; padding:10px; text-align:center; }
+    th { background:#8e44ad; color:#fff; }
+  </style>
+</head>
+<body>
+  <h2>Tracking IDs</h2>
+  <table>
+    <tr>
+      <th>Courier ID</th><th>Tracking ID</th>
+    </tr>
+    {% for t in tracking %}
+    <tr>
+      <td>{{ t.id }}</td>
+      <td>{{ t.tracking_id }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <br>
+  <a href="{{ url_for('admin_dashboard') }}">⬅ Back</a>
+</body>
+</html>

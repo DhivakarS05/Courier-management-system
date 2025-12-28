@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Preview Courier</title>
+    <style>
+        body { font-family: Arial; background: #f2f2f2; display: flex; justify-content: center; padding: 20px; }
+        .container { background: #fff; padding: 25px; border-radius: 10px; width: 400px; }
+        h2 { text-align: center; margin-bottom: 20px; }
+        .preview { background: #f9f9f9; padding: 15px; border-radius: 5px; }
+        button { margin-top: 15px; padding: 10px; width: 100%; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        .back-link { display: block; margin-top: 15px; text-align: center; text-decoration: none; color: #007bff; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>📋 Courier Preview</h2>
+    <div class="preview">
+        <p><strong>Sender:</strong> {{ preview.sender_name }} → {{ preview.sender_address }}</p>
+        <p><strong>Receiver:</strong> {{ preview.receiver_name }} → {{ preview.receiver_address }}</p>
+        <p><strong>Courier Type:</strong> {{ preview.courier_type }}</p>
+        <p><strong>Weight:</strong> {{ preview.weight }} kg</p>
+        <p><strong>Pickup Charge:</strong> ₹{{ preview.pickup_charge }}</p>
+        <p><strong>Insurance Charge:</strong> ₹{{ preview.insurance_charge }}</p>
+        <p><strong>Total Cost:</strong> ₹{{ preview.total_cost }}</p>
+        <p>✅ Pickup within 24 hours, delivery within 2 days.</p>
+    </div>
+
+    <form method="POST">
+        <button type="submit">Confirm Booking</button>
+    </form>
+
+    <a class="back-link" href="{{ url_for('book_courier') }}">⬅ Back to Edit</a>
+</div>
+</body>
+</html>

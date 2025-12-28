@@ -1,0 +1,92 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f6f9;
+    color: #333;
+}
+
+/* Navigation bar */
+nav {
+    background: #2c3e50;
+    padding: 12px;
+}
+nav a {
+    color: white;
+    margin-right: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Page container */
+.container {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+/* Forms */
+form {
+    margin-top: 10px;
+}
+input, textarea, select, button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+button {
+    background: #3498db;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background: #2980b9;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+table, th, td {
+    border: 1px solid #ddd;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+th {
+    background: #2c3e50;
+    color: white;
+}
+tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Links */
+a {
+    color: #3498db;
+}
+a:hover {
+    color: #2980b9;
+}
