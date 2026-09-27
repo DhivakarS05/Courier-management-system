@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Couriers</title>
+  <style>
+    body { font-family: Arial; background:#f9f9f9; padding:20px; }
+    table { border-collapse: collapse; width: 100%; background:#fff; }
+    th, td { border:1px solid #ddd; padding:10px; text-align:center; }
+    th { background:#00695c; color:#fff; }
+  </style>
+</head>
+<body>
+  <h2>Courier Details</h2>
+  <table>
+    <tr>
+      <th>ID</th><th>Sender</th><th>Receiver</th><th>Status</th>
+    </tr>
+    {% for c in couriers %}
+    <tr>
+      <td>{{ c.id }}</td>
+      <td>{{ c.sender_name }}</td>
+      <td>{{ c.receiver_name }}</td>
+      <td>{{ c.status }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <br>
+  <a href="{{ url_for('admin_dashboard') }}">⬅ Back</a>
+</body>
+</html>

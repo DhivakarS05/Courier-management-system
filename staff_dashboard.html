@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Staff Dashboard</title>
+  <style>
+    body { font-family: Arial; background:#f9f9f9; padding:20px; }
+    table { border-collapse: collapse; width: 100%; background:#fff; }
+    th, td { border:1px solid #ddd; padding:10px; text-align:center; }
+    th { background:#444; color:#fff; }
+    select, button { padding:5px; }
+    .delivered { color:green; font-weight:bold; }
+    .pending { color:orange; font-weight:bold; }
+    .in-transit { color:blue; font-weight:bold; }
+  </style>
+</head>
+<body>
+  <h2>My Assigned Couriers</h2>
+  <table>
+    <tr>
+      <th>ID</th><th>Tracking ID</th><th>Customer</th><th>Pickup</th>
+      <th>Delivery</th><th>Status</th><th>Action</th>
+    </tr>
+    {% for c in couriers %}
+    <tr>
+      <td>{{ c.id }}</td>
+      <td>{{ c.tracking_id }}</td>
+      <td>{{ c.customer_name }}<br>{{ c.customer_phone }}<br></td>
+      <td>{{ c.sender_address }}</td>
+      <td>{{ c.receiver_address }}</td>
+      <td>
+        <span class="{% if c.status == 'Delivered' %}delivered{% elif c.status == 'In Transit' %}in-transit{% else %}pending{% endif %}">
+          {{ c.status }}
+        </span>
+      </td>
+      <td>
+        <form action="{{ url_for('update_status', courier_id=c.id) }}" method="post">
+          <select name="status">
+            <option value="Pending" {% if c.status == "Pending" %}selected{% endif %}>Pending</option>
+            <option value="In Transit" {% if c.status == "In Transit" %}selected{% endif %}>In Transit</option>
+            <option value="Delivered" {% if c.status == "Delivered" %}selected{% endif %}>Delivered</option>
+          </select>
+          <button type="submit">Update</button>
+        </form>
+        
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  <a href="{{ url_for('login_staff') }}" 
+          style="display: inline-block; margin-top: 15px; padding: 10px 20px; 
+          background-color: #007bff; color: white; text-decoration: none; 
+          border-radius: 5px;">⬅ Back to Login</a>
+</body>
+</html>

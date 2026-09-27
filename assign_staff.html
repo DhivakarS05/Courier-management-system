@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Assign Staff for Courier Pickup</title>
+  <style>
+    body { font-family: Arial; background:#eef; padding:20px; }
+    table { width:100%; border-collapse: collapse; background:#fff; }
+    th, td { border:1px solid #ccc; padding:10px; text-align:left; }
+    th { background:#007bff; color:#fff; }
+    form { display:inline; }
+    select, button { padding:5px; margin:0; }
+    button { background:#28a745; color:#fff; border:none; border-radius:4px; cursor:pointer; }
+    button:hover { background:#218838; }
+    h2 { margin-bottom:20px; }
+  </style>
+</head>
+<body>
+  <h2>Assign Staff to Courier</h2>
+
+  {% if couriers %}
+  <table>
+    <tr>
+      <th>Courier ID</th>
+      <th>Sender</th>
+      <th>Sender Phone</th>
+      <th>Receiver</th>
+      <th>Receiver Phone</th>
+      <th>Pickup Address</th>
+      <th>Delivery Address</th>
+      <th>Status</th>
+      <th>Assigned Staff</th>
+      <th>Action</th>
+    </tr>
+    {% for courier in couriers %}
+    <tr>
+      <td>{{ courier.courier_id }}</td>
+      <td>{{ courier.sender_name }}</td>
+      <td>{{ courier.sender_phone }}</td>
+      <td>{{ courier.receiver_name }}</td>
+      <td>{{ courier.receiver_phone }}</td>
+      <td>{{ courier.pickup_address }}</td>
+      <td>{{ courier.delivery_address }}</td>
+      <td>{{ courier.status }}</td>
+      <td>{{ courier.staff_name if courier.staff_name else "Not Assigned" }}</td>
+      <td>
+        <form method="POST">
+          <input type="hidden" name="courier_id" value="{{ courier.courier_id }}">
+          <select name="staff_id" required>
+            {% for staff in staff_list %}
+              <option value="{{ staff.staff_id }}">{{ staff.name }}</option>
+            {% endfor %}
+          </select>
+          <button type="submit">Assign</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+    <p>No couriers found. Make sure some couriers are booked first.</p>
+  {% endif %}
+
+  <br>
+  <a href="{{ url_for('admin_dashboard') }}">⬅ Back</a>
+</body>
+</html>

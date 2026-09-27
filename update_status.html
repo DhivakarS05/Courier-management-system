@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Status</title>
+</head>
+<body>
+    <h2>Update Status for Courier ID: {{ courier_id }}</h2>
+    <form method="POST">
+        <select name="status" required>
+            <option value="Pending">Pending</option>
+            <option value="In Transit">In Transit</option>
+            <option value="Delivered">Delivered</option>
+        </select>
+        <button type="submit">Update</button>
+    </form>
+    <a href="{{ url_for('staff_dashboard') }}">Back to Staff Dashboard</a>
+</body>
+</html>

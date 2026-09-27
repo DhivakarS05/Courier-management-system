@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login - Courier Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-box {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+      width: 350px;
+      text-align: center;
+    }
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #00c6ff;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background: #00c6ff;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn:hover {
+      background: #009acd;
+    }
+    a {
+      color: #00c6ff;
+      text-decoration: none;
+      display: block;
+      margin-top: 10px;
+    }
+    .flash-message {
+      background: #ff4d4d;
+      color: white;
+      padding: 8px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Admin Login</h2>
+
+    <!-- Display flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      <input type="text" name="username" placeholder="Enter Username" required>
+      <input type="password" name="password" placeholder="Enter Password" required>
+      <button type="submit" class="btn">Login</button>
+    </form>
+
+    <a href="{{ url_for('home') }}">⬅ Back to Home</a>
+  </div>
+</body>
+</html>

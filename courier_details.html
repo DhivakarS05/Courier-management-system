@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Courier Details</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f2f2f2; }
+        .container { background: #fff; padding: 20px; border-radius: 10px; max-width: 600px; margin: auto; }
+        h2 { text-align: center; }
+        p { margin: 8px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📦 Courier Details</h2>
+        <p><strong>Tracking ID:</strong> {{ courier.tracking_id }}</p>
+        <p><strong>Sender Name:</strong> {{ courier.sender_name }}</p>
+        <p><strong>Sender Address:</strong> {{ courier.sender_address }}</p>
+        <p><strong>Sender Pincode:</strong> {{ courier.sender_pincode }}</p>
+        <p><strong>Sender Phone:</strong> {{ courier.sender_phone }}</p>
+        <p><strong>Receiver Name:</strong> {{ courier.receiver_name }}</p>
+        <p><strong>Receiver Address:</strong> {{ courier.receiver_address }}</p>
+        <p><strong>Receiver Pincode:</strong> {{ courier.receiver_pincode }}</p>
+        <p><strong>Receiver Phone:</strong> {{ courier.receiver_phone }}</p>
+        <p><strong>Courier Type:</strong> {{ courier.courier_type if courier.courier_type else "N/A" }}</p>
+        <p><strong>Weight:</strong> {{ courier.weight if courier.weight else 0 }} kg</p>
+        <p><strong>Pickup Charge:</strong> ₹{{ courier.pickup_charge }}</p>
+        <p><strong>Insurance Charge:</strong> ₹{{ courier.insurance_charge }}</p>
+        <p><strong>Total Cost:</strong> ₹{{ courier.total_cost }}</p>
+        <p><strong>Status:</strong> {{ courier.status }}</p>
+        <p><strong>Booked On:</strong> {{ courier.created_at }}</p>
+
+        <a href="{{ url_for('my_couriers') }}">⬅ Back to My Couriers</a>
+    </div>
+</body>
+</html>

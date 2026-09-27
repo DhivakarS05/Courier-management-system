@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Track Courier</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #00b4db, #0083b0);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: rgba(0,0,0,0.7);
+      padding: 30px;
+      border-radius: 15px;
+      width: 400px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      background: #fff;
+      color: #0083b0;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #ffd700;
+      color: #000;
+    }
+    a {
+       color: #e5d30a;
+    }
+
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+  <h2>Track Your Courier</h2>
+  <form method="POST">
+    <input type="text" name="tracking_id" placeholder="Enter Tracking ID" required>
+    <button type="submit">Track</button>
+  </form>
+  <a class="back-link" href="{{ url_for('customer_dashboard') }}">⬅ Back to Dashboard</a>
+
+  {% if courier %}
+  <div class="details">
+    <p><b>Tracking ID:</b> {{ courier.tracking_id }}</p>
+    <p><b>Status:</b> {{ courier.status if courier.status else "Booked" }}</p>
+    <p><b>Pickup Address:</b> {{ courier.sender_address }}</p>
+    <p><b>Delivery Address:</b> {{ courier.receiver_address }}</p>
+    <p><b>Courier Type:</b> {{ courier.courier_type }}</p>
+    <p><b>Weight:</b> {{ courier.weight }} kg</p>
+    <p><b>Cost:</b> ₹ {{ courier.total_cost }}</p>
+    {% if est_delivery %}
+      <p><b>📅 Estimated Delivery:</b> {{ est_delivery.strftime('%d %B %Y') }}</p>
+    {% endif %}
+  </div>
+  {% elif request.method == 'POST' %}
+    <p style="color: red;">❌ No courier found with that ID.</p>
+  {% endif %}
+</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Staff</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .form-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input[type="text"], input[type="password"], select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #007bff;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Edit Staff</h2>
+    <form method="POST" action="{{ url_for('edit_staff', staff_id=staff.id) }}">
+      <label>Name:</label>
+      <input type="text" name="name" value="{{ staff.name }}" required>
+
+      <label>Username:</label>
+      <input type="text" name="username" value="{{ staff.username }}" required>
+
+      <label>Password:</label>
+      <input type="password" name="password" placeholder="Leave blank to keep current password">
+
+      <button type="submit">Update Staff</button>
+    </form>
+
+    <a href="{{ url_for('view_staff') }}">⬅ Back</a>
+  </div>
+</body>
+</html>
